@@ -54,7 +54,8 @@ class TestUserDocs(unittest.TestCase):
         """Test for the presence of docstrings in User methods"""
         for func in self.user_f:
             self.assertIsNot(
-                func[1].__doc__, None, "{:s} method needs a docstring".format(func[0])
+                func[1].__doc__, None,
+                "{:s} method needs a docstring".format(func[0])
             )
             self.assertTrue(
                 len(func[1].__doc__) >= 1,

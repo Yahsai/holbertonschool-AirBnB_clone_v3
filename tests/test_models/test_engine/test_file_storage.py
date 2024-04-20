@@ -18,6 +18,9 @@ import json
 import os
 import pep8
 import unittest
+from models import storage
+from models import storage
+from models import storage
 FileStorage = file_storage.FileStorage
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -113,18 +116,19 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
-        
-         def test_get(self):
+
+    def test_get(self):
         """Test the get method"""
         # Test getting an existing object
-        obj = models.storage.get(BaseModel, self.obj.id)
+        obj = storage.get(BaseModel, self.obj.id)
         self.assertEqual(obj, self.obj)
 
         # Test getting a non-existing object
-        obj = models.storage.get(BaseModel, "non_existing_id")
+        obj = storage.get(BaseModel, "non_existing_id")
         self.assertIsNone(obj)
 
         # Test with None parameters
+        self.assertIsNone(storage.get(None, None))
         self.assertIsNone(models.storage.get(None, None))
 
     def test_count(self):

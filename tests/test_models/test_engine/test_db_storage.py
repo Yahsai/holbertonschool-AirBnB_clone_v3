@@ -18,6 +18,9 @@ import json
 import os
 import pep8
 import unittest
+from models.base_model import BaseModel
+from models.base_model import BaseModel
+from models.base_model import BaseModel
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
@@ -72,7 +75,7 @@ class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_returns_dict(self):
-        """Test that all returns a dictionaty"""
+        """Test that all returns a dictionary"""
         self.assertIs(type(models.storage.all()), dict)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
@@ -82,21 +85,18 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_new(self):
         """test that new adds an object to the database"""
+        @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+        def test_get(self):
+            """Test that get returns the correct object"""
+            # Test getting an existing object
+            obj = models.storage.get(BaseModel, self.obj.id)
+            self.assertIsNone(obj)
 
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
-    def test_save(self):
-        """Test that save properly saves objects to file.json"""
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
-    def test_get(self):
-     """Test that get returns the correct object"""
-        # Test getting an existing object
-        obj = models.storage.get(BaseModel, self.obj.id)
-        self.assertIsNone(obj)
-
-        # Test getting a non-existing object
-        obj = models.storage.get(BaseModel, "fake_id")
-        self.assertIsNone(obj)
-        # Test with None parameters
+            # Test getting a non-existing object
+            obj = models.storage.get(BaseModel, "fake_id")
+            self.assertIsNone(obj)
+            # Test with None parameters
+            self.assertIsNone(models.storage.get(None, None))
         self.assertIsNone(models.storage.get(None, None))
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
