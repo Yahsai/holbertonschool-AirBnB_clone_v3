@@ -73,7 +73,8 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(user, "created_at"))
         self.assertTrue(hasattr(user, "updated_at"))
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_email_attr(self):
         """Test that User has attr email, and it's an empty string"""
         user = User()
@@ -83,7 +84,8 @@ class TestUser(unittest.TestCase):
         else:
             self.assertEqual(user.email, "")
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_password_attr(self):
         """Test that User has attr password, and it's an empty string"""
         user = User()
@@ -93,7 +95,8 @@ class TestUser(unittest.TestCase):
         else:
             self.assertEqual(user.password, "")
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_first_name_attr(self):
         """Test that User has attr first_name, and it's an empty string"""
         user = User()
@@ -103,7 +106,8 @@ class TestUser(unittest.TestCase):
         else:
             self.assertEqual(user.first_name, "")
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_last_name_attr(self):
         """Test that User has attr last_name, and it's an empty string"""
         user = User()

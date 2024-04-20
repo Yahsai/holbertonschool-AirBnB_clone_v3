@@ -65,7 +65,8 @@ class TestStateDocs(unittest.TestCase):
 class TestState(unittest.TestCase):
     """Test the State class"""
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_is_subclass(self):
         """Test that State is a subclass of BaseModel"""
         state = State()
@@ -74,7 +75,8 @@ class TestState(unittest.TestCase):
         self.assertTrue(hasattr(state, "created_at"))
         self.assertTrue(hasattr(state, "updated_at"))
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_name_attr(self):
         """Test that State has attribute name, and it's as an empty string"""
         state = State()
@@ -84,7 +86,8 @@ class TestState(unittest.TestCase):
         else:
             self.assertEqual(state.name, "")
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_to_dict_creates_dict(self):
         """test to_dict method creates a dictionary with proper attrs"""
         s = State()
@@ -96,7 +99,8 @@ class TestState(unittest.TestCase):
                 self.assertTrue(attr in new_d)
         self.assertTrue("__class__" in new_d)
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_to_dict_values(self):
         """test that values in dict returned from to_dict are correct"""
         t_format = "%Y-%m-%dT%H:%M:%S.%f"
@@ -108,7 +112,8 @@ class TestState(unittest.TestCase):
         self.assertEqual(new_d["created_at"], s.created_at.strftime(t_format))
         self.assertEqual(new_d["updated_at"], s.updated_at.strftime(t_format))
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_str(self):
         """test that the str method has the correct output"""
         state = State()

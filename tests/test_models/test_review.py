@@ -72,7 +72,8 @@ class TestReview(unittest.TestCase):
         self.assertTrue(hasattr(review, "created_at"))
         self.assertTrue(hasattr(review, "updated_at"))
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_place_id_attr(self):
         """Test Review has attr place_id, and it's an empty string"""
         review = Review()
@@ -82,7 +83,8 @@ class TestReview(unittest.TestCase):
         else:
             self.assertEqual(review.place_id, "")
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_user_id_attr(self):
         """Test Review has attr user_id, and it's an empty string"""
         review = Review()
@@ -92,7 +94,8 @@ class TestReview(unittest.TestCase):
         else:
             self.assertEqual(review.user_id, "")
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBStorage")
     def test_text_attr(self):
         """Test Review has attr text, and it's an empty string"""
         review = Review()

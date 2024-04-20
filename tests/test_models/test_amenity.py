@@ -73,7 +73,8 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(hasattr(amenity, "created_at"))
         self.assertTrue(hasattr(amenity, "updated_at"))
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Testing DBstorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "Testing DBstorage")
     def test_name_attr(self):
         """Test that Amenity has attribute name, and it's as an empty string"""
         amenity = Amenity()
@@ -83,7 +84,8 @@ class TestAmenity(unittest.TestCase):
         else:
             self.assertEqual(amenity.name, "")
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") != "db", "Testing FileStorage")
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") != "db",
+                     "Testing FileStorage")
     def test_name_attr_db(self):
         """Test for DBStorage name attribute"""
         amenity = Amenity()
