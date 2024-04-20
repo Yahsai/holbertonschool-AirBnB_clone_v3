@@ -42,18 +42,22 @@ class TestReviewDocs(unittest.TestCase):
     def test_review_module_docstring(self):
         """Test for the review.py module docstring"""
         self.assertIsNot(review.__doc__, None, "review.py needs a docstring")
-        self.assertTrue(len(review.__doc__) >= 1, "review.py needs a docstring")
+        self.assertTrue(len(review.__doc__) >= 1,
+                        "review.py needs a docstring")
 
     def test_review_class_docstring(self):
         """Test for the Review class docstring"""
-        self.assertIsNot(Review.__doc__, None, "Review class needs a docstring")
-        self.assertTrue(len(Review.__doc__) >= 1, "Review class needs a docstring")
+        self.assertIsNot(Review.__doc__, None,
+                         "Review class needs a docstring")
+        self.assertTrue(len(Review.__doc__) >= 1,
+                        "Review class needs a docstring")
 
     def test_review_func_docstrings(self):
         """Test for the presence of docstrings in Review methods"""
         for func in self.review_f:
             self.assertIsNot(
-                func[1].__doc__, None, "{:s} method needs a docstring".format(func[0])
+                func[1].__doc__, None,
+                "{:s} method needs a docstring".format(func[0])
             )
             self.assertTrue(
                 len(func[1].__doc__) >= 1,
