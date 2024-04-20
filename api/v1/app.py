@@ -10,34 +10,34 @@ from flasgger.utils import swag_from
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config["JSONIFY_PRETTYPRINT_REGULAR"] = True
 app.register_blueprint(app_views)
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
 def close_db(error):
-    """ Close Storage """
+    """Close Storage"""
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """ 404 Error
+    """404 Error
     ---
     responses:
       404:
         description: a resource was not found
     """
-    return make_response(jsonify({'error': "Not found"}), 404)
+    return make_response(jsonify({"error": "Not found"}), 404)
 
 
 if __name__ == "__main__":
-    """ Main Function """
-    host = environ.get('HBNB_API_HOST')
-    port = environ.get('HBNB_API_PORT')
+    """Main Function"""
+    host = environ.get("HBNB_API_HOST")
+    port = environ.get("HBNB_API_PORT")
     if not host:
-        host = '0.0.0.0'
+        host = "0.0.0.0"
     if not port:
-        port = '5000'
+        port = "5000"
     app.run(host=host, port=port, threaded=True)
