@@ -11,7 +11,8 @@ from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
 
 
-@app_views.route("/cities/<city_id>/places", methods=["GET"], strict_slashes=False)
+@app_views.route("/cities/<city_id>/places",
+                 methods=["GET"], strict_slashes=False)
 def get_places(city_id):
     """
     Retrieves the list of all Place objects of a City
@@ -38,7 +39,8 @@ def get_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route("/places/<place_id>", methods=["DELETE"], strict_slashes=False)
+@app_views.route("/places/<place_id>",
+                 methods=["DELETE"], strict_slashes=False)
 def delete_place(place_id):
     """
     Deletes a Place Object
@@ -55,7 +57,8 @@ def delete_place(place_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route("/cities/<city_id>/places", methods=["POST"], strict_slashes=False)
+@app_views.route("/cities/<city_id>/places",
+                 methods=["POST"], strict_slashes=False)
 def post_place(city_id):
     """
     Creates a Place
@@ -126,12 +129,12 @@ def places_search():
         cities = data.get("cities", None)
         amenities = data.get("amenities", None)
 
-    if not data or not len(data) or (not states and not cities and not amenities):
-        places = storage.all(Place).values()
-        list_places = []
-        for place in places:
-            list_places.append(place.to_dict())
-        return jsonify(list_places)
+        if not states and not cities and not amenities:
+            places = storage.all(Place).values()
+            list_places = []
+            for place in places:
+                list_places.append(place.to_dict())
+            return jsonify(list_places)
 
     list_places = []
     if states:

@@ -9,7 +9,8 @@ from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
 
 
-@app_views.route("/places/<place_id>/reviews", methods=["GET"], strict_slashes=False)
+@app_views.route("/places/<place_id>/reviews",
+                 methods=["GET"], strict_slashes=False)
 @swag_from("documentation/reviews/get_reviews.yml", methods=["GET"])
 def get_reviews(place_id):
     """
@@ -38,8 +39,10 @@ def get_review(review_id):
     return jsonify(review.to_dict())
 
 
-@app_views.route("/reviews/<review_id>", methods=["DELETE"], strict_slashes=False)
-@swag_from("documentation/reviews/delete_reviews.yml", methods=["DELETE"])
+@app_views.route("/reviews/<review_id>",
+                 ethods=["DELETE"], strict_slashes=False)
+@swag_from("documentation/reviews/delete_reviews.yml",
+           methods=["DELETE"])
 def delete_review(review_id):
     """
     Deletes a Review Object
@@ -56,8 +59,10 @@ def delete_review(review_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route("/places/<place_id>/reviews", methods=["POST"], strict_slashes=False)
-@swag_from("documentation/reviews/post_reviews.yml", methods=["POST"])
+@app_views.route("/places/<place_id>/reviews",
+                 methods=["POST"], strict_slashes=False)
+@swag_from("documentation/reviews/post_reviews.yml",
+           methods=["POST"])
 def post_review(place_id):
     """Uploads a Review object"""
     place = storage.get(Place, place_id)
@@ -90,7 +95,8 @@ def put_review(review_id):
     if not request.get_json():
         abort(400, description="Not a JSON")
     for attr, val in request.get_json().items():
-        if attr not in ["id", "user_id", "place_id", "created_at", "updated_at"]:
+        if attr not in ["id", "user_id",
+                        "place_id", "created_at", "updated_at"]:
             setattr(review, attr, val)
     review.save()
     return jsonify(review.to_dict())
