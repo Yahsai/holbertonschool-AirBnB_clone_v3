@@ -133,7 +133,8 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Update an instance based on the class name, id, attribute & value"""
         args = shlex.split(arg)
-        integers = ["number_rooms", "number_bathrooms", "max_guest", "price_by_night"]
+        integers = ["number_rooms",
+                    "number_bathrooms", "max_guest", "price_by_night"]
         floats = ["latitude", "longitude"]
         if len(args) == 0:
             print("** class name missing **")
