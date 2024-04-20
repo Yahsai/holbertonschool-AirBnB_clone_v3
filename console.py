@@ -137,35 +137,39 @@ class HBNBCommand(cmd.Cmd):
         floats = ["latitude", "longitude"]
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] in classes:
-            if len(args) > 1:
-                k = args[0] + "." + args[1]
-                if k in models.storage.all():
-                    if len(args) > 2:
-                        if len(args) > 3:
-                            if args[0] == "Place":
-                                if args[2] in integers:
-                                    try:
-                                        args[3] = int(args[3])
-                                    except ValueError:
-                                        args[3] = 0
-                                elif args[2] in floats:
-                                    try:
-                                        args[3] = float(args[3])
-                                    except ValueError:
-                                        args[3] = 0.0
-                            setattr(models.storage.all()[k], args[2], args[3])
-                            models.storage.all()[k].save()
-                        else:
-                            print("** value missing **")
-                    else:
-                        print("** attribute name missing **")
-                else:
-                    print("** no instance found **")
-            else:
-                print("** instance id missing **")
-        else:
+            return
+        if args[0] not in classes:
             print("** class doesn't exist **")
+            return
+        if len(args) <= 1:
+            print("** instance id missing **")
+            return
+        k = args[0] + "." + args[1]
+        if k not in models.storage.all():
+            print("** no instance found **")
+            return
+        if len(args) <= 2:
+            print("** attribute name missing **")
+            return
+        if len(args) <= 3:
+            print("** value missing **")
+            return
+        instance = models.storage.all()[k]
+        attribute = args[2]
+        value = args[3]
+        if args[0] == "Place":
+            if attribute in integers:
+                try:
+                    value = int(value)
+                except ValueError:
+                    value = 0
+            elif attribute in floats:
+                try:
+                    value = float(value)
+                except ValueError:
+                    value = 0.0
+        setattr(instance, attribute, value)
+        instance.save()
 
 
 if __name__ == "__main__":
