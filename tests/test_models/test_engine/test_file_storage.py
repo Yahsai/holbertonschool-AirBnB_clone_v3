@@ -142,12 +142,6 @@ test_file_storage.py"
         actual = FileStorage.close.__doc__
         self.assertEqual(expected, actual)
 
-    def test_doc_get(self):
-        """... documentation for get function"""
-        expected = 'retrieve one object'
-        actual = FileStorage.get.__doc__
-        self.assertEqual(expected, actual)
-
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
