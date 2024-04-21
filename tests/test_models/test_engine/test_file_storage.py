@@ -131,7 +131,6 @@ test_file_storage.py"
         self.assertEqual(expected, actual)
 
 
-
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
 
