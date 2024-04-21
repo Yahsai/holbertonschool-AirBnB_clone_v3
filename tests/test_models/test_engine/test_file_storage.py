@@ -223,7 +223,6 @@ class TestFileStorage(unittest.TestCase):
 
     @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
                      "not testing file storage")
-
     def test_delete(self):
         """Test the delete method"""
         storage = FileStorage()
