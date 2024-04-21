@@ -18,7 +18,6 @@ import json
 import os
 import pep8
 import unittest
-from models import storage
 
 FileStorage = file_storage.FileStorage
 classes = {
@@ -91,6 +90,46 @@ test_file_storage.py"
                 len(func[1].__doc__) >= 1,
                 "{:s} method needs a docstring".format(func[0]),
             )
+
+    def test_doc_file(self):
+        """... documentation for the file"""
+        expected = ("\nHandles I/O, writing and reading, of JSON for storage "
+                    "of all class instances\n")
+        actual = FileStorage.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_class(self):
+        """... documentation for the class"""
+        expected = 'handles long term storage of all class instances'
+        actual = FileStorage.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_all(self):
+        """... documentation for all function"""
+        expected = 'returns private attribute: __objects'
+        actual = FileStorage.all.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_new(self):
+        """... documentation for new function"""
+        expected = ("sets / updates in __objects the obj with key <obj class "
+                    "name>.id")
+        actual = FileStorage.new.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_save(self):
+        """... documentation for save function"""
+        expected = 'serializes __objects to the JSON file (path: __file_path)'
+        actual = FileStorage.save.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_reload(self):
+        """... documentation for reload function"""
+        expected = ("if file exists, deserializes JSON file to __objects, "
+                    "else nothing")
+        actual = FileStorage.reload.__doc__
+        self.assertEqual(expected, actual)
+
 
 
 class TestFileStorage(unittest.TestCase):
