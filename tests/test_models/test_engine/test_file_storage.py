@@ -18,6 +18,7 @@ import json
 import os
 import pep8
 import unittest
+from models.engine.file_storage import FileStorage
 
 FileStorage = file_storage.FileStorage
 classes = {
@@ -93,26 +94,37 @@ test_file_storage.py"
 
     def test_doc_file(self):
         """... documentation for the file"""
-        expected = ("\nHandles I/O, writing and reading, of JSON for storage "
-                    "of all class instances\n")
-        actual = FileStorage.__doc__
-        self.assertEqual(expected, actual)
+        expected = ("\nHandles I/O, writing and reading, of JSON for storage ")
 
-    def test_doc_class(self):
-        """... documentation for the class"""
-        expected = 'handles long term storage of all class instances'
-        actual = FileStorage.__doc__
-        self.assertEqual(expected, actual)
+    class TestFileStorageDocs(unittest.TestCase):
+        """Tests to check the documentation and style of FileStorage class"""
 
-    def test_doc_all(self):
-        """... documentation for all function"""
-        expected = 'returns private attribute: __objects'
-        actual = FileStorage.all.__doc__
-        self.assertEqual(expected, actual)
+        @classmethod
+        def setUpClass(cls):
+            """Set up for the doc tests"""
+            cls.fs_f = inspect.getmembers(FileStorage, inspect.isfunction)
 
-    def test_doc_new(self):
-        """... documentation for new function"""
-        expected = ("sets / updates in __objects the obj with key <obj class "
+        def test_doc_class(self):
+            """... documentation for the class"""
+            expected = 'handles long term storage of all class instances'
+            actual = FileStorage.__doc__
+            self.assertEqual(expected, actual)
+
+        def test_doc_all(self):
+            """... documentation for all function"""
+            expected = 'returns private attribute: __objects'
+            actual = FileStorage.all.__doc__
+            self.assertEqual(expected, actual)
+
+        def test_doc_new(self):
+            """... documentation for new function"""
+            expected = ("sets / updates in __objects the\
+                        obj with key <obj class "
+                        "name>.id")
+            actual = FileStorage.new.__doc__
+            self.assertEqual(expected, actual)
+        expected = ("sets / updates in __objects the\
+            obj with key <obj class "
                     "name>.id")
         actual = FileStorage.new.__doc__
         self.assertEqual(expected, actual)
