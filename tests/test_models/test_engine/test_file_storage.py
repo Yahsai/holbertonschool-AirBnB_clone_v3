@@ -130,6 +130,24 @@ test_file_storage.py"
         actual = FileStorage.reload.__doc__
         self.assertEqual(expected, actual)
 
+    def test_doc_delete(self):
+        """... documentation for delete function"""
+        expected = 'delete obj from __objects if it exists'
+        actual = FileStorage.delete.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_close(self):
+        """... documentation for close function"""
+        expected = 'call reload() method for deserializing the JSON file'
+        actual = FileStorage.close.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_get(self):
+        """... documentation for get function"""
+        expected = 'retrieve one object'
+        actual = FileStorage.get.__doc__
+        self.assertEqual(expected, actual)
+
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
@@ -192,16 +210,50 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
                      "not testing file storage")
     def test_count(self):
-        """Test that the count method properly counts objects"""
+        """Test the count() function"""
+        state = State()
+        state.name = "State_name"
+        storage = models.storage
+        storage.new(state)
+        storage.save()
+        self.assertTrue(storage.count(State) > 0)
+        self.assertTrue(storage.count() > 0)
+        self.assertTrue(storage.count(State) == storage.count(State))
+        self.assertTrue(storage.count() == storage.count(State))
+
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "not testing file storage")
+
+    def test_delete(self):
+        """Test the delete method"""
         storage = FileStorage()
-        self.assertEqual(storage.count(), 0)
         new_user = User()
         new_user.save()
-        self.assertEqual(storage.count(), 1)
-        new_user2 = User()
-        new_user2.save()
-        self.assertEqual(storage.count(), 2)
-        new_user2.delete()
-        self.assertEqual(storage.count(), 1)
-        new_user.delete()
-        self.assertEqual(storage.count(), 0)
+        storage.delete(new_user)
+        self.assertIs(storage.get("User", new_user.id), None)
+
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "not testing file storage")
+    def test_close(self):
+        """Test the close method"""
+        storage = FileStorage()
+        storage.reload()
+        storage.close()
+        self.assertTrue(os.path.exists("file.json"))
+
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
+                     "not testing file storage")
+    def test_reload(self):
+        """Test the reload method"""
+        storage = FileStorage()
+        new_dict = {}
+        for key, value in classes.items():
+            instance = value()
+            instance_key = instance.__class__.__name__ + "." + instance.id
+            new_dict[instance_key] = instance
+        save = FileStorage._FileStorage__objects
+        FileStorage._FileStorage__objects = new_dict
+        storage.save()
+        storage.reload()
+        for key, value in new_dict.items():
+            self.assertTrue(value == storage.all()[key])
