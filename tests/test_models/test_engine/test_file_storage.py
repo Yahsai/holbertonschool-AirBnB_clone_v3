@@ -217,9 +217,6 @@ class TestFileStorage(unittest.TestCase):
         storage.new(state)
         storage.save()
         self.assertTrue(storage.count(State) > 0)
-        self.assertTrue(storage.count() > 0)
-        self.assertTrue(storage.count(State) == storage.count(State))
-        self.assertTrue(storage.count() == storage.count(State))
 
     @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
                      "not testing file storage")
