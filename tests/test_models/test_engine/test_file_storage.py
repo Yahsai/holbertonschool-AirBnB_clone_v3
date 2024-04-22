@@ -18,6 +18,7 @@ import json
 import os
 import pep8
 import unittest
+from models.engine.file_storage import Fi
 
 FileStorage = file_storage.FileStorage
 classes = {
